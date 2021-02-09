@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.30611.23
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForestMath.Linear", "ForestMath.Linear\ForestMath.Linear.csproj", "{4B519E26-048A-4023-8F84-D23772CE6318}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForestMath.Linear", "ForestMath.Linear\ForestMath.Linear.csproj", "{E823577B-15CD-471F-80C4-FBC482DDC730}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4B519E26-048A-4023-8F84-D23772CE6318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4B519E26-048A-4023-8F84-D23772CE6318}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4B519E26-048A-4023-8F84-D23772CE6318}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4B519E26-048A-4023-8F84-D23772CE6318}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E823577B-15CD-471F-80C4-FBC482DDC730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E823577B-15CD-471F-80C4-FBC482DDC730}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E823577B-15CD-471F-80C4-FBC482DDC730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E823577B-15CD-471F-80C4-FBC482DDC730}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {538135D9-5799-4503-8479-5E16316004CE}
+		SolutionGuid = {143F03A7-8608-4D6A-ACC9-29DAD092BBD6}
 	EndGlobalSection
 EndGlobal
