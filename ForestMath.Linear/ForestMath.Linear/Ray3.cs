@@ -10,13 +10,13 @@ namespace ForestMath.Linear {
 		public Vector3 StartPoint;
 		public bool IsLine;
 
-		public bool IsAxisXDirected { get { return Dir.x != 0.0; } }
-		public bool IsAxisYDirected { get { return Dir.y != 0.0; } }
-		public bool IsAxisZDirected { get { return Dir.z != 0.0; } }
+		public bool IsAxisXDirected { get { return Dir.X != 0.0; } }
+		public bool IsAxisYDirected { get { return Dir.Y != 0.0; } }
+		public bool IsAxisZDirected { get { return Dir.Z != 0.0; } }
 
-		public Vector3 ShiftYZ { get { return IsAxisXDirected ? StartPoint - Dir * (StartPoint.x / Dir.x) : throw new Exception($"The ray {this} isn't directed by axis x"); } }
-		public Vector3 ShiftXZ { get { return IsAxisYDirected ? StartPoint - Dir * (StartPoint.y / Dir.y) : throw new Exception($"The ray {this} isn't directed by axis y"); } }
-		public Vector3 ShiftXY { get { return IsAxisZDirected ? StartPoint - Dir * (StartPoint.z / Dir.z) : throw new Exception($"The ray {this} isn't directed by axis z"); } }
+		public Vector3 ShiftYZ { get { return IsAxisXDirected ? StartPoint - Dir * (StartPoint.X / Dir.X) : throw new Exception($"The ray {this} isn't directed by axis x"); } }
+		public Vector3 ShiftXZ { get { return IsAxisYDirected ? StartPoint - Dir * (StartPoint.Y / Dir.Y) : throw new Exception($"The ray {this} isn't directed by axis y"); } }
+		public Vector3 ShiftXY { get { return IsAxisZDirected ? StartPoint - Dir * (StartPoint.Z / Dir.Z) : throw new Exception($"The ray {this} isn't directed by axis z"); } }
 
 		public Ray3(Vector3 point, Vector3 dir, bool isLine = false) { 
 			this.Dir = dir;
@@ -24,33 +24,33 @@ namespace ForestMath.Linear {
 			this.IsLine = isLine;
 		}
 
-		public static Ray3 fromTwoPoints(Vector3 from, Vector3 to, bool isLine = false) {
+		public static Ray3 FromTwoPoints(Vector3 from, Vector3 to, bool isLine = false) {
 			return new Ray3(from, to - from, isLine);
 		}
 
 		
 
-		public bool getPointWithX(double x, out Vector3 result) {
-			if(Dir.x != 0.0) {
-				result = (x / Dir.x) * Dir + ShiftYZ;
+		public bool GetPointWithX(double x, out Vector3 result) {
+			if(Dir.X != 0.0) {
+				result = (x / Dir.X) * Dir + ShiftYZ;
 				return true;
 			} else {
 				result = default;
 				return false;
 			}
 		}
-		public bool getPointWithY(double y, out Vector3 result) { 
-			if(Dir.y != 0.0) {
-				result = Dir * (y / Dir.y) + ShiftXZ;
+		public bool GetPointWithY(double y, out Vector3 result) { 
+			if(Dir.Y != 0.0) {
+				result = Dir * (y / Dir.Y) + ShiftXZ;
 				return true;
 			} else {
 				result = default;
 				return false;
 			}
 		}
-		public bool getPointWithZ(double z, out Vector3 result) { 
-			if(Dir.z != 0.0) {
-				result = Dir * (z / Dir.z) + ShiftXY;
+		public bool GetPointWithZ(double z, out Vector3 result) { 
+			if(Dir.Z != 0.0) {
+				result = Dir * (z / Dir.Z) + ShiftXY;
 				return true;
 			} else {
 				result = default;
@@ -62,16 +62,16 @@ namespace ForestMath.Linear {
 			return $"({StartPoint}) - ({Dir})";
 		}
 
-		public bool isXOnRay(double x) {
-			return (x == StartPoint.x) || (IsAxisXDirected && (IsLine || (x > StartPoint.x ? Dir.x > 0 : Dir.x < 0)));
+		public bool IsXOnRay(double x) {
+			return (x == StartPoint.X) || (IsAxisXDirected && (IsLine || (x > StartPoint.X ? Dir.X > 0 : Dir.X < 0)));
 		}
 
-		public bool isYOnRay(double y) {
-			return (y == StartPoint.y) || (IsAxisYDirected && (IsLine || (y > StartPoint.y ? Dir.y > 0 : Dir.y < 0)));
+		public bool IsYOnRay(double y) {
+			return (y == StartPoint.Y) || (IsAxisYDirected && (IsLine || (y > StartPoint.Y ? Dir.Y > 0 : Dir.Y < 0)));
 		}
 
-		public bool isZOnRay(double z) {
-			return (z == StartPoint.z) || (IsAxisZDirected && (IsLine || (z > StartPoint.z ? Dir.z > 0 : Dir.z < 0)));
+		public bool IsZOnRay(double z) {
+			return (z == StartPoint.Z) || (IsAxisZDirected && (IsLine || (z > StartPoint.Z ? Dir.Z > 0 : Dir.Z < 0)));
 		}
 	};
 }

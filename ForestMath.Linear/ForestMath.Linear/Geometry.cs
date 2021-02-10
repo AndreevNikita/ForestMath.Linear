@@ -9,22 +9,22 @@ namespace ForestMath.Linear {
 
 		public enum AngleMeasure { RADIANS, DEGREES };
 
-		public static double toRadians(double angle) {
+		public static double ToRadians(double angle) {
 			return angle / 180.0 * Math.PI;
 		}
 
-		public static double toDegrees(double rads) {
+		public static double ToDegrees(double rads) {
 			return rads / Math.PI * 180.0;
 		}
 
-		public static bool getCrossPoint(Ray3 ray, Plane plane, out Vector3 result) { 
-			return getCrossPoint(ray, plane.normal, plane.d, out result);
+		public static bool GetCrossPoint(Ray3 ray, Plane plane, out Vector3 result) { 
+			return GetCrossPoint(ray, plane.Normal, plane.D, out result);
 		}
 
 		
-		public static bool getCrossPoint(Ray3 ray, Vector3 normal, double d, out Vector3 result) {
+		public static bool GetCrossPoint(Ray3 ray, Vector3 normal, double d, out Vector3 result) {
 			//Перпендикулярность вектора. Вероятность пересечения крайне мала
-			if(ray.Dir.x * normal.x + ray.Dir.y * normal.y + ray.Dir.z * normal.z == 0) {
+			if(ray.Dir.X * normal.X + ray.Dir.Y * normal.Y + ray.Dir.Z * normal.Z == 0) {
 				result = default;
 				return false;
 			}
@@ -37,34 +37,50 @@ namespace ForestMath.Linear {
 
 			if(ray.IsAxisXDirected) {
 				Vector3 shiftYZ = ray.ShiftYZ;
-				double x = -(normal.y * shiftYZ.y + normal.z * shiftYZ.z + d) / (normal.x + normal.y * ray.Dir.y / ray.Dir.x + normal.z * ray.Dir.z / ray.Dir.x);
-				if(ray.isXOnRay(x))
-					return ray.getPointWithX(x, out result);
+				double x = -(normal.Y * shiftYZ.Y + normal.Z * shiftYZ.Z + d) / (normal.X + normal.Y * ray.Dir.Y / ray.Dir.X + normal.Z * ray.Dir.Z / ray.Dir.X);
+				if(ray.IsXOnRay(x))
+					return ray.GetPointWithX(x, out result);
 			} else if(ray.IsAxisYDirected) {
 				Vector3 shiftXZ = ray.ShiftXZ;
-				double y = -(normal.x * shiftXZ.x + normal.z * shiftXZ.z + d) / (normal.y + normal.x * ray.Dir.x / ray.Dir.y + normal.z * ray.Dir.z / ray.Dir.y);
-				if(ray.isYOnRay(y))
-					return ray.getPointWithY(y, out result);
+				double y = -(normal.X * shiftXZ.X + normal.Z * shiftXZ.Z + d) / (normal.Y + normal.X * ray.Dir.X / ray.Dir.Y + normal.Z * ray.Dir.Z / ray.Dir.Y);
+				if(ray.IsYOnRay(y))
+					return ray.GetPointWithY(y, out result);
 			} else if(ray.IsAxisZDirected) {
 				Vector3 shiftXY = ray.ShiftXY;
-				double z = -(normal.y * shiftXY.y + normal.x * shiftXY.x + d) / (normal.z + normal.y * ray.Dir.y / ray.Dir.z + normal.x * ray.Dir.x / ray.Dir.z);
-				if(ray.isZOnRay(z))
-					return ray.getPointWithZ(z, out result);
+				double z = -(normal.Y * shiftXY.Y + normal.X * shiftXY.X + d) / (normal.Z + normal.Y * ray.Dir.Y / ray.Dir.Z + normal.X * ray.Dir.X / ray.Dir.Z);
+				if(ray.IsZOnRay(z))
+					return ray.GetPointWithZ(z, out result);
 			}
 
 			result = default;
 			return false;
 		}
-		public static bool getXPlaneCrossPoint(Ray3 ray, double planeX, Vector3 crossPoint, out Vector3 result) {
-			return ray.getPointWithX(planeX, out result);
+		public static bool GetXPlaneCrossPoint(Ray3 ray, double planeX, Vector3 crossPoint, out Vector3 result) {
+			return ray.GetPointWithX(planeX, out result);
 		}
 
-		public static bool getYPlaneCrossPoint(Ray3 ray, double planeY, Vector3 crossPoint, out Vector3 result) {
-			return ray.getPointWithY(planeY, out result);
+		public static bool GetYPlaneCrossPoint(Ray3 ray, double planeY, Vector3 crossPoint, out Vector3 result) {
+			return ray.GetPointWithY(planeY, out result);
 		}
 
-		public static bool getZPlaneCrossPoint(Ray3 ray, double planeZ, Vector3 crossPoint, out Vector3 result) {
-			return ray.getPointWithZ(planeZ, out result);
+		public static bool GetZPlaneCrossPoint(Ray3 ray, double planeZ, Vector3 crossPoint, out Vector3 result) {
+			return ray.GetPointWithZ(planeZ, out result);
+		}
+
+		public static Vector2 Interpolate(Vector2 a, Vector2 b, double percent) {
+			return a * (1.0 - percent) + b * percent;
+		}
+
+		public static Vector3 Interpolate(Vector3 a, Vector3 b, double percent) {
+			return a * (1.0 - percent) + b * percent;
+		}
+
+		public static Vector4 Interpolate(Vector4 a, Vector4 b, double percent) {
+			return a * (1.0 - percent) + b * percent;
+		}
+
+		public static Vector3 Interpolate(Quaternion a, Quaternion b, double percent) {
+			return a * (1.0 - percent) + b * percent;
 		}
 	}
 }

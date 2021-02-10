@@ -7,116 +7,116 @@ using static ForestMath.Linear.Geometry;
 
 namespace ForestMath.Linear {
 	public struct Quaternion {
-		public double w, x, y, z;
+		public double W, X, Y, Z;
 
 		public Quaternion(double w, double x, double y, double z, bool fromEulers = true, bool normalize = true, AngleMeasure measure = AngleMeasure.RADIANS) {
 			if(fromEulers) {
 				if(measure == AngleMeasure.DEGREES)
-					w = Geometry.toRadians(w);
-				this.w = Math.Cos(w / 2.0);
+					w = Geometry.ToRadians(w);
+				this.W = Math.Cos(w / 2.0);
 				double sinwd2 = Math.Sin(w / 2.0);
-				this.x = x * sinwd2;
-				this.y = y * sinwd2;
-				this.z = z * sinwd2;
+				this.X = x * sinwd2;
+				this.Y = y * sinwd2;
+				this.Z = z * sinwd2;
 			} else {
-				this.w = w;
-				this.x = x;
-				this.y = y;
-				this.z = z;
+				this.W = w;
+				this.X = x;
+				this.Y = y;
+				this.Z = z;
 			}
 
 			
 			if(normalize)
-				this.normalize();
+				this.Normalize();
 		}
 
 		public Quaternion(Vector3 vec) {
-			w = 0;
-			x = vec.x;
-			y = vec.y;
-			z = vec.z;
+			W = 0;
+			X = vec.X;
+			Y = vec.Y;
+			Z = vec.Z;
 		}
 
 		public static Quaternion operator+(Quaternion a, Quaternion b) {
-			return new Quaternion(a.w + b.w, a.x + b.x, a.y + b.y, a.z + b.z, false, false);
+			return new Quaternion(a.W + b.W, a.X + b.X, a.Y + b.Y, a.Z + b.Z, false, false);
 		}
 
 		public static Quaternion operator-(Quaternion a, Quaternion b) {
-			return new Quaternion(a.w - b.w, a.x - b.x, a.y - b.y, a.z - b.z, false, false);
+			return new Quaternion(a.W - b.W, a.X - b.X, a.Y - b.Y, a.Z - b.Z, false, false);
 		}
 
 		public static Quaternion operator-(Quaternion a) {
-			return new Quaternion(a.w, -a.x, -a.y, -a.z, false, false);
+			return new Quaternion(a.W, -a.X, -a.Y, -a.Z, false, false);
 		}
 
 		
 		public static Quaternion operator*(Quaternion a, double mul) {
-			return new Quaternion(a.w * mul, a.x * mul , a.y * mul, a.z * mul, false, false);
+			return new Quaternion(a.W * mul, a.X * mul , a.Y * mul, a.Z * mul, false, false);
 		}
 
 		public static Quaternion operator/(Quaternion a, double div) {
-			return new Quaternion(a.w / div, a.x / div , a.y / div, a.z / div, false, false);
+			return new Quaternion(a.W / div, a.X / div , a.Y / div, a.Z / div, false, false);
 		}
 
 		//a * b дают кватернион, равносильный повороту сначала b потом a
 		public static Quaternion operator*(Quaternion a, Quaternion b) {
 			return new Quaternion(
-				a.w * b.w - a.x * b.x - a.y * b.y - a.z * b.z, 
-				a.x * b.w + a.w * b.x + a.y * b.z - a.z * b.y,
-				a.y * b.w + a.w * b.y + a.z * b.x - a.x * b.z, 
-				a.z * b.w + a.w * b.z + a.x * b.y - a.y * b.x, false, true);
+				a.W * b.W - a.X * b.X - a.Y * b.Y - a.Z * b.Z, 
+				a.X * b.W + a.W * b.X + a.Y * b.Z - a.Z * b.Y,
+				a.Y * b.W + a.W * b.Y + a.Z * b.X - a.X * b.Z, 
+				a.Z * b.W + a.W * b.Z + a.X * b.Y - a.Y * b.X, false, true);
 		}
 
-		public double length() {
-			return Math.Sqrt(w * w + x * x + y * y + z * z);
+		public double GetLength() {
+			return Math.Sqrt(W * W + X * X + Y * Y + Z * Z);
 		}
 
-		public void normalize() {
-			double l = length();
-			w /= l;
-			x /= l;
-			y /= l;
-			z /= l;
+		public void Normalize() {
+			double l = GetLength();
+			W /= l;
+			X /= l;
+			Y /= l;
+			Z /= l;
 		}
 
-		public Quaternion normalized() {
-			return new Quaternion(w, x, y, z, false, true);
+		public Quaternion Normalized() {
+			return new Quaternion(W, X, Y, Z, false, true);
 		}
 
-		public Vector3 getYawPitchRoll(AngleMeasure measure = AngleMeasure.RADIANS) {
+		public Vector3 GetYawPitchRoll(AngleMeasure measure = AngleMeasure.RADIANS) {
 			return measure == AngleMeasure.RADIANS ? new Vector3(
-				Math.Atan2(2*y*w - 2*x*z, 1 - 2*y*y - 2*z*z),
-				Math.Asin(Math.Max(Math.Min(2*x*y + 2*z*w, 1.0), -1.0)),
-				Math.Atan2(2*x*w - 2*y*z, 1 - 2*x*x - 2*z*z)
+				Math.Atan2(2*Y*W - 2*X*Z, 1 - 2*Y*Y - 2*Z*Z),
+				Math.Asin(Math.Max(Math.Min(2*X*Y + 2*Z*W, 1.0), -1.0)),
+				Math.Atan2(2*X*W - 2*Y*Z, 1 - 2*X*X - 2*Z*Z)
 			) : new Vector3(
-				Geometry.toDegrees(Math.Atan2(2*y*w - 2*x*z, 1 - 2*y*y - 2*z*z)),
-				Geometry.toDegrees(Math.Asin(Math.Max(Math.Min(2*x*y + 2*z*w, 1.0), -1.0))),
-				Geometry.toDegrees(Math.Atan2(2*x*w - 2*y*z, 1 - 2*x*x - 2*z*z))
+				Geometry.ToDegrees(Math.Atan2(2*Y*W - 2*X*Z, 1 - 2*Y*Y - 2*Z*Z)),
+				Geometry.ToDegrees(Math.Asin(Math.Max(Math.Min(2*X*Y + 2*Z*W, 1.0), -1.0))),
+				Geometry.ToDegrees(Math.Atan2(2*X*W - 2*Y*Z, 1 - 2*X*X - 2*Z*Z))
 			);
 		}
 
-		public Vector3 rotate(Vector3 vec) {
+		public Vector3 Rotate(Vector3 vec) {
 			return this * new Quaternion(vec) * (-this);
 		}
 
-		public static Quaternion fromYawPitch(double yaw, double pitch, double roll) {
+		public static Quaternion FromYawPitch(double yaw, double pitch, double roll) {
 			return new Quaternion(yaw, 0.0, 1.0, 0.0) * new Quaternion(pitch, 0.0, 0.0, 1.0) * new Quaternion(roll, 1.0, 0.0, 0.0);
 		}
 
-		public static double scalarMultiply(Quaternion a, Quaternion b) {
-			return a.w * b.w + a.x * b.x + a.y * b.y * a.z * b.z;
+		public static double ScalarMultiply(Quaternion a, Quaternion b) {
+			return a.W * b.W + a.X * b.X + a.Y * b.Y * a.Z * b.Z;
 		}
 
-		public static Vector3 transform(Vector3 vec, Quaternion quaternion) {
+		public static Vector3 Transform(Vector3 vec, Quaternion quaternion) {
 			return  quaternion * new Quaternion(vec) * (-quaternion);
 		}
 
 		public static implicit operator Quaternion(Vector3 vec) {
-			return new Quaternion(0.0, vec.x, vec.y, vec.z, false);
+			return new Quaternion(0.0, vec.X, vec.Y, vec.Z, false);
 		}
 
 		public override string ToString() {
-			 return getYawPitchRoll(AngleMeasure.DEGREES).ToString();
+			 return GetYawPitchRoll(AngleMeasure.DEGREES).ToString();
 		}
 	};
 }

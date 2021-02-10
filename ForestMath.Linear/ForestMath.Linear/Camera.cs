@@ -8,11 +8,11 @@ namespace ForestMath.Linear {
 	//Направление OpenGL по умолчанию = (0, 0, 1)
 	//Направление камеры по умолчанию = (1, 0, 0)
 	public class Camera { 
-		public Vector3 pos;
-		public Vector3 ypr = new Vector3();
+		public Vector3 Pos;
+		public Vector3 YPR = new Vector3();
 		public Vector3 Direction {
-			get { return getDirection(); }
-			set { setDirection(value); }
+			get { return GetDirection(); }
+			set { SetDirection(value); }
 		}
 		
 		public Camera() : this(new Vector3(1.0, 0.0, 0.0), new Vector3(0.0, 0.0, 0.0)) {
@@ -24,16 +24,16 @@ namespace ForestMath.Linear {
 		}
 
 		public void set(Vector3 pos, Vector3 ypr) {
-			this.pos = pos;
-			this.ypr = ypr;
+			this.Pos = pos;
+			this.YPR = ypr;
 		}
 
 		//Roll - вокруг X
 		//Pitch - вокруг Z
 		//Yaw - вокруг Y
 
-		public Matrix4 getMatrix() { 
-			Matrix4 result = Matrix4.identity();
+		public Matrix4 GetMatrix() { 
+			Matrix4 result = Matrix4.Identity();
 
 			//Камера OpenGL по умолчанию направлена в (0, 0, 1)
 			//=> сначала поворачиваем все объекты дополнительно на 90 градусов -(ypr.Yaw + Math.PI / 2.0).
@@ -47,10 +47,10 @@ namespace ForestMath.Linear {
 			//result *= Polygon.Matrix4.rotationX(ypr.Pitch, Geometry.AngleMeasure.RADIANS);
 
 
-			result *= Matrix4.rotationZ(-ypr.Roll, Geometry.AngleMeasure.RADIANS);
-			result *= Matrix4.rotationX(ypr.Pitch, Geometry.AngleMeasure.RADIANS);
-			result *= Matrix4.rotationY(-(ypr.Yaw + Math.PI / 2.0), Geometry.AngleMeasure.RADIANS);
-			result *= Matrix4.translation(-pos.x, -pos.y, -pos.z);
+			result *= Matrix4.RotationZ(-YPR.Roll, Geometry.AngleMeasure.RADIANS);
+			result *= Matrix4.RotationX(YPR.Pitch, Geometry.AngleMeasure.RADIANS);
+			result *= Matrix4.RotationY(-(YPR.Yaw + Math.PI / 2.0), Geometry.AngleMeasure.RADIANS);
+			result *= Matrix4.Translation(-Pos.X, -Pos.Y, -Pos.Z);
 			
 
 
@@ -58,19 +58,19 @@ namespace ForestMath.Linear {
 		}
 
 		//Тут ничего не трогаем, камера по умолчанию всегда смотрит в (1, 0, 0). Все повороты работают с этим вектором
-		public Vector3 getDirection() {
-			return Matrix4.rotationY(ypr.Yaw) * Matrix4.rotationZ(ypr.Pitch) * Matrix4.rotationZ(ypr.Roll) * new Vector4(1.0, 0.0, 0.0, 1.0);
+		public Vector3 GetDirection() {
+			return Matrix4.RotationY(YPR.Yaw) * Matrix4.RotationZ(YPR.Pitch) * Matrix4.RotationZ(YPR.Roll) * new Vector4(1.0, 0.0, 0.0, 1.0);
 		}
 
-		public void setDirection(double x, double y, double z) {
-			setDirection(new Vector3(x, y, z));
+		public void SetDirection(double x, double y, double z) {
+			SetDirection(new Vector3(x, y, z));
 		}
 
-		public void setDirection(Vector3 dir) {
-			ypr.Yaw = dir.x != 0 && dir.z != 0 ? new Vector2(dir.x, -dir.z).getAngle(false) : 0;
+		public void SetDirection(Vector3 dir) {
+			YPR.Yaw = dir.X != 0 && dir.Z != 0 ? new Vector2(dir.X, -dir.Z).GetAngle(false) : 0;
 			//Console.WriteLine("Set direction: {0}", dir);
 			//Console.WriteLine(dir.y / dir.Length);
-			ypr.Pitch = Math.Asin(dir.y / dir.Length);
+			YPR.Pitch = Math.Asin(dir.Y / dir.Length);
 		}
 
 	}
