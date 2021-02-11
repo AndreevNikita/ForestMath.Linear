@@ -33,7 +33,7 @@ namespace ForestMath.Linear {
 		//Yaw - вокруг Y
 
 		public Matrix4 GetMatrix() { 
-			Matrix4 result = Matrix4.Identity();
+			Matrix4 result = Matrix4.Identity;
 
 			//Камера OpenGL по умолчанию направлена в (0, 0, 1)
 			//=> сначала поворачиваем все объекты дополнительно на 90 градусов -(ypr.Yaw + Math.PI / 2.0).

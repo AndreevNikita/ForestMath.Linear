@@ -106,7 +106,7 @@ namespace ForestMath.Linear {
 			return result;
 		}
 
-		public static Matrix4 operator*(Matrix4 a, double b) {
+		public static Matrix4 operator/(Matrix4 a, double b) {
 			Matrix4 result = new Matrix4();
 			result.MatrixData[0, 0] = a.MatrixData[0, 0] / b;
 			result.MatrixData[0, 1] = a.MatrixData[0, 1] / b;
