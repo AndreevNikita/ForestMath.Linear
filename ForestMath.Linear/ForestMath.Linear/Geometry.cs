@@ -17,6 +17,8 @@ namespace ForestMath.Linear {
 			return rads / Math.PI * 180.0;
 		}
 
+		//Cross points
+
 		public static bool GetCrossPoint(Ray3 ray, Plane plane, out Vector3 result) { 
 			return GetCrossPoint(ray, plane.Normal, plane.D, out result);
 		}
@@ -67,6 +69,9 @@ namespace ForestMath.Linear {
 			return ray.GetPointWithZ(planeZ, out result);
 		}
 
+
+		//Interpolation
+
 		public static Vector2 Interpolate(Vector2 a, Vector2 b, double percent) {
 			return a * (1.0 - percent) + b * percent;
 		}
@@ -82,5 +87,28 @@ namespace ForestMath.Linear {
 		public static Vector3 Interpolate(Quaternion a, Quaternion b, double percent) {
 			return a * (1.0 - percent) + b * percent;
 		}
+
+		//Quaternions
+
+		public static double ScalarMultiply(Quaternion a, Quaternion b) {
+			return a.W * b.W + a.X * b.X + a.Y * b.Y * a.Z * b.Z;
+		}
+
+		public static Vector3 Rotate(Vector3 vec, Quaternion quaternion) {
+			return  quaternion * new Quaternion(vec) * (-quaternion);
+		}
+
+		public static void Rotate(ref Vector3 vec, Quaternion quaternion) {
+			vec = quaternion * new Quaternion(vec) * (-quaternion);
+		}
+
+		public static Ray3 RotateFull(Ray3 ray, Quaternion quaternion) {
+			return Ray3.FromTwoPoints(Rotate(ray.StartPoint, quaternion), Rotate(ray.StartPoint + ray.Dir, quaternion), ray.IsLine);
+		}
+
+		public static Ray3 RotateDir(Ray3 ray, Quaternion quaternion) {
+			return new Ray3(ray.StartPoint, Rotate(ray.StartPoint + ray.Dir, quaternion), ray.IsLine);
+		}
+
 	}
 }

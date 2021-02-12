@@ -103,14 +103,6 @@ namespace ForestMath.Linear {
 			return new Quaternion(yaw, 0.0, 1.0, 0.0) * new Quaternion(pitch, 0.0, 0.0, 1.0) * new Quaternion(roll, 1.0, 0.0, 0.0);
 		}
 
-		public static double ScalarMultiply(Quaternion a, Quaternion b) {
-			return a.W * b.W + a.X * b.X + a.Y * b.Y * a.Z * b.Z;
-		}
-
-		public static Vector3 Transform(Vector3 vec, Quaternion quaternion) {
-			return  quaternion * new Quaternion(vec) * (-quaternion);
-		}
-
 		public static implicit operator Quaternion(Vector3 vec) {
 			return new Quaternion(0.0, vec.X, vec.Y, vec.Z, false);
 		}
@@ -118,5 +110,7 @@ namespace ForestMath.Linear {
 		public override string ToString() {
 			 return GetYawPitchRoll(AngleMeasure.DEGREES).ToString();
 		}
+
+
 	};
 }
