@@ -71,8 +71,12 @@ namespace ForestMath.Linear {
 			return Dot(a, b) / (a.GetLength() * b.GetLength());
 		}
 
-		public static double Dot(this Quaternion a, Quaternion b) { 
+		public static double Dot(Quaternion a, Quaternion b) { 
 			return a.W * b.W + a.W * b.W + a.X * b.X + a.Y * b.Y + a.Z * b.Z;
+		}
+
+		public double Dot(Quaternion b) { 
+			return Dot(this, b);
 		}
 
 
