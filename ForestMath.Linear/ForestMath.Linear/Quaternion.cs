@@ -67,8 +67,25 @@ namespace ForestMath.Linear {
 				a.Z * b.W + a.W * b.Z + a.X * b.Y - a.Y * b.X, false, true);
 		}
 
+		public static double operator^(Quaternion a, Quaternion b) { 
+			return Dot(a, b) / (a.GetLength() * b.GetLength());
+		}
+
+		public static double Dot(this Quaternion a, Quaternion b) { 
+			return a.W * b.W + a.W * b.W + a.X * b.X + a.Y * b.Y + a.Z * b.Z;
+		}
+
+
 		public double GetLength() {
 			return Math.Sqrt(W * W + X * X + Y * Y + Z * Z);
+		}
+
+		public double GetSqrLength() {
+			return W * W + X * X + Y * Y + Z * Z;
+		}
+
+		public Quaternion Reverse() { 
+			return (-this) / GetSqrLength();
 		}
 
 		public void Normalize() {
