@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ForestMath.Linear {
-	public partial class Geometry {
+	public static partial class Geometry {
 
 		public enum AngleMeasure { RADIANS, DEGREES };
 
@@ -94,7 +94,7 @@ namespace ForestMath.Linear {
 			return a.W * b.W + a.X * b.X + a.Y * b.Y * a.Z * b.Z;
 		}
 
-		public static Vector3 Rotate(Vector3 vec, Quaternion quaternion) {
+		public static Vector3 Rotate(this Vector3 vec, Quaternion quaternion) {
 			return  quaternion * new Quaternion(vec) * (-quaternion);
 		}
 
@@ -102,12 +102,16 @@ namespace ForestMath.Linear {
 			vec = quaternion * new Quaternion(vec) * (-quaternion);
 		}
 
-		public static Ray3 RotateFull(Ray3 ray, Quaternion quaternion) {
+		public static Ray3 RotateFull(this Ray3 ray, Quaternion quaternion) {
 			return Ray3.FromTwoPoints(Rotate(ray.StartPoint, quaternion), Rotate(ray.StartPoint + ray.Dir, quaternion), ray.IsLine);
 		}
 
-		public static Ray3 RotateDir(Ray3 ray, Quaternion quaternion) {
+		public static Ray3 RotateDir(this Ray3 ray, Quaternion quaternion) {
 			return new Ray3(ray.StartPoint, Rotate(ray.StartPoint + ray.Dir, quaternion), ray.IsLine);
+		}
+
+		public static Ray3 Shift(this Ray3 ray, Vector3 shiftVec) { 
+			return new Ray3(ray.StartPoint + shiftVec, ray.Dir, ray.IsLine);
 		}
 
 	}
