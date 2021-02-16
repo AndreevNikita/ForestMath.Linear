@@ -9,6 +9,8 @@ namespace ForestMath.Linear {
 	public struct Quaternion {
 		public double W, X, Y, Z;
 
+		public static readonly Quaternion Zero = FromYawPitchRoll(0, 0, 0);
+
 		public Quaternion(double w, double x, double y, double z, bool fromEulers = true, bool normalize = true, AngleMeasure measure = AngleMeasure.RADIANS) {
 			if(fromEulers) {
 				if(measure == AngleMeasure.DEGREES)
@@ -120,7 +122,7 @@ namespace ForestMath.Linear {
 			return this * new Quaternion(vec) * (-this);
 		}
 
-		public static Quaternion FromYawPitch(double yaw, double pitch, double roll) {
+		public static Quaternion FromYawPitchRoll(double yaw, double pitch = 0.0, double roll = 0.0) {
 			return new Quaternion(yaw, 0.0, 1.0, 0.0) * new Quaternion(pitch, 0.0, 0.0, 1.0) * new Quaternion(roll, 1.0, 0.0, 0.0);
 		}
 
