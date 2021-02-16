@@ -69,6 +69,21 @@ namespace ForestMath.Linear {
 			return ray.GetPointWithZ(planeZ, out result);
 		}
 
+		//In checkers
+		public static bool CheckIn(double a, double value, double b) { 
+			return (a <= value) && (value <= b);
+		}
+
+		public static bool CheckIn(Vector2 a, Vector2 value, Vector2 b) { 
+			//Optimized without top level CheckIn call
+			return (a.X <= value.X) && (value.X <= b.X) && (a.Y <= value.Y) && (value.Y <= b.Y);
+		}
+
+		public static bool CheckIn(Vector3 a, Vector3 value, Vector3 b) { 
+			//Optimized without top level CheckIn call
+			return (a.X <= value.X) && (value.X <= b.X) && (a.Y <= value.Y) && (value.Y <= b.Y) && (a.Z <= value.Z) && (value.Z <= b.Z);
+		}
+
 
 		//Interpolation
 
