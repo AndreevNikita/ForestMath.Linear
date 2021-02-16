@@ -8,6 +8,11 @@ using static ForestMath.Linear.Geometry;
 namespace ForestMath.Linear {
 	public struct Vector3 { 
 		public double X, Y, Z;
+
+		public Vector2 XY { get => new Vector2(X, Y); }
+		public Vector2 YZ { get => new Vector2(Y, Z); }
+		public Vector2 ZX { get => new Vector2(Z, X); }
+
 		public double Yaw {
 			get { return X; }
 			set { X = value; }

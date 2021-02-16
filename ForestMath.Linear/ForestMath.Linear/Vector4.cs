@@ -8,6 +8,15 @@ namespace ForestMath.Linear {
 	public struct Vector4 { 
 		public double X, Y, Z, W;
 
+		public Vector3 XYZ { get => new Vector3(X, Y, Z); }
+		public Vector3 YZW { get => new Vector3(Y, Z, W); }
+		public Vector3 ZWX { get => new Vector3(Z, W, X); }
+		public Vector3 WXY { get => new Vector3(W, X, Y); }
+
+		public Vector2 XY { get => new Vector2(X, Y); }
+		public Vector2 YZ { get => new Vector2(Y, Z); }
+		public Vector2 ZX { get => new Vector2(Z, X); }
+
 		public double Length {
 			get { return length(); }
 			set { 
