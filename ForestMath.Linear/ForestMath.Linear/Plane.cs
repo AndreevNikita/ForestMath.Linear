@@ -23,6 +23,12 @@ namespace ForestMath.Linear {
 			}
 		}
 
+		public static Plane FromPoints(Vector3 point1, Vector3 point2, Vector3 point3) { 
+			Vector3 vec1 = point2 - point1;
+			Vector3 vec2 = point3 - point1;
+
+		}
+
 		public void SetNormalShift(double normalLength) {
 			D = -Normal.SqrLength() * normalLength;
 		}

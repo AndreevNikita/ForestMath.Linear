@@ -17,6 +17,10 @@ namespace ForestMath.Linear {
 			return rads / Math.PI * 180.0;
 		}
 
+		public static Vector3 CrossProduct(Vector3 vec1, Vector3 vec2) { 
+			return new Vector3(vec1.Y * vec2.Z - vec2.Y * vec1.Z, vec1.Z * vec2.X - vec1.X * vec2.Z, vec1.Y * vec2.Z - vec2.Y * vec1.Z);
+		}
+
 		//Cross points
 
 		public static bool GetCrossPoint(Ray3 ray, Plane plane, out Vector3 result) { 

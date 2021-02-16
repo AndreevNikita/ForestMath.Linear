@@ -32,7 +32,7 @@ namespace ForestMath.Linear {
 
 		public bool GetPointWithX(double x, out Vector3 result) {
 			if(Dir.X != 0.0) {
-				result = (x / Dir.X) * Dir + ShiftYZ;
+				result = Dir * (x / Dir.X) + ShiftYZ;
 				return true;
 			} else {
 				result = default;
