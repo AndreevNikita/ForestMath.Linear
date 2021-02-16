@@ -125,9 +125,15 @@ namespace ForestMath.Linear {
 			return new Ray3(ray.StartPoint, Rotate(ray.StartPoint + ray.Dir, quaternion), ray.IsLine);
 		}
 
-		public static Ray3 Shift(this Ray3 ray, Vector3 shiftVec) { 
-			return new Ray3(ray.StartPoint + shiftVec, ray.Dir, ray.IsLine);
-		}
+		//Shifts
+
+		public static Vector2 Shift(this Vector2 vec, Vector2 shiftVec) { return vec + shiftVec; }
+
+		public static Vector3 Shift(this Vector3 vec, Vector3 shiftVec) { return vec + shiftVec; }
+
+		public static Vector4 Shift(this Vector4 vec, Vector4 shiftVec) { return vec + shiftVec; }
+
+		public static Ray3 Shift(this Ray3 ray, Vector3 shiftVec) { return new Ray3(ray.StartPoint + shiftVec, ray.Dir, ray.IsLine); }
 
 	}
 }
