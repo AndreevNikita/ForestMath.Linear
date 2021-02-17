@@ -27,7 +27,7 @@ namespace ForestMath.Linear {
 		}
 
 		
-		public bool GetPointWithX(double x, out Vector3 result) {
+		public bool GetPointWithX(double x, out Vector2 result) {
 			if(Dir.X != 0.0) {
 				result = Dir * (x / Dir.X) + ShiftY;
 				return true;
@@ -36,7 +36,7 @@ namespace ForestMath.Linear {
 				return false;
 			}
 		}
-		public bool GetPointWithY(double y, out Vector3 result) { 
+		public bool GetPointWithY(double y, out Vector2 result) { 
 			if(Dir.Y != 0.0) {
 				result = Dir * (y / Dir.Y) + ShiftX;
 				return true;
