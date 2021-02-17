@@ -10,6 +10,11 @@ namespace ForestMath.Linear {
 		public Vector3 StartPoint;
 		public bool IsLine;
 
+		public Ray2 XYProj { get => new Ray2(StartPoint.XY, Dir.XY, IsLine); }
+		public Ray2 YZProj { get => new Ray2(StartPoint.YZ, Dir.YZ, IsLine); }
+		public Ray2 ZXProj { get => new Ray2(StartPoint.ZX, Dir.ZX, IsLine); }
+
+
 		public bool IsAxisXDirected { get { return Dir.X != 0.0; } }
 		public bool IsAxisYDirected { get { return Dir.Y != 0.0; } }
 		public bool IsAxisZDirected { get { return Dir.Z != 0.0; } }
