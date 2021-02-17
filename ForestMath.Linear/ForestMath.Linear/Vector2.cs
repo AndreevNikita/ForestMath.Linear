@@ -9,6 +9,8 @@ namespace ForestMath.Linear {
 	public struct Vector2 { 
 		public double X, Y;
 
+		public double Tan { get => Y / X; }
+
 		public double Length {
 			get { return GetLength(); }
 			set { 
