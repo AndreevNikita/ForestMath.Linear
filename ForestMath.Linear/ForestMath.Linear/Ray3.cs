@@ -18,6 +18,8 @@ namespace ForestMath.Linear {
 		public Ray2 ZYProj { get => new Ray2(StartPoint.ZY, Dir.ZY, IsLine); }
 		public Ray2 XZProj { get => new Ray2(StartPoint.XZ, Dir.XZ, IsLine); }
 
+
+
 		public bool IsAxisXDirected { get { return Dir.X != 0.0; } }
 		public bool IsAxisYDirected { get { return Dir.Y != 0.0; } }
 		public bool IsAxisZDirected { get { return Dir.Z != 0.0; } }
