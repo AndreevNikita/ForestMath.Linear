@@ -64,7 +64,7 @@ namespace ForestMath.Linear {
 		}
 
 		public override string ToString() {
-			return $"({StartPoint}) - ({Dir})";
+			return $"{StartPoint} - {Dir}";
 		}
 
 		public bool IsXOnRay(double x) {
