@@ -33,5 +33,9 @@ namespace ForestMath.Linear {
 		public void SetNormalShift(double normalLength) {
 			D = -Normal.SqrLength() * normalLength;
 		}
+
+		public override string ToString() {
+			return $"(N = {Normal}; D = {D})";
+		}
 	};
 }
