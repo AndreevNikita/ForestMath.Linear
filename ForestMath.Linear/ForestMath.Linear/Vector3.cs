@@ -13,6 +13,10 @@ namespace ForestMath.Linear {
 		public Vector2 YZ { get => new Vector2(Y, Z); }
 		public Vector2 ZX { get => new Vector2(Z, X); }
 
+		public Vector2 YX { get => new Vector2(Y, X); }
+		public Vector2 ZY { get => new Vector2(Z, Y); }
+		public Vector2 XZ { get => new Vector2(X, Z); }
+
 		public double Yaw {
 			get { return X; }
 			set { X = value; }

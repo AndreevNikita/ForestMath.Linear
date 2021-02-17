@@ -14,6 +14,9 @@ namespace ForestMath.Linear {
 		public Ray2 YZProj { get => new Ray2(StartPoint.YZ, Dir.YZ, IsLine); }
 		public Ray2 ZXProj { get => new Ray2(StartPoint.ZX, Dir.ZX, IsLine); }
 
+		public Ray2 YXProj { get => new Ray2(StartPoint.YX, Dir.YX, IsLine); }
+		public Ray2 ZYProj { get => new Ray2(StartPoint.ZY, Dir.ZY, IsLine); }
+		public Ray2 XZProj { get => new Ray2(StartPoint.XZ, Dir.XZ, IsLine); }
 
 		public bool IsAxisXDirected { get { return Dir.X != 0.0; } }
 		public bool IsAxisYDirected { get { return Dir.Y != 0.0; } }
