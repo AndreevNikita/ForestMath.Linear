@@ -26,7 +26,8 @@ namespace ForestMath.Linear {
 		public static Plane FromPoints(Vector3 point1, Vector3 point2, Vector3 point3) { 
 			Vector3 vec1 = point2 - point1;
 			Vector3 vec2 = point3 - point1;
-
+			Vector3 normal = Geometry.CrossProduct(vec1, vec2);
+			return new Plane(normal, -normal * point1, ParameterType.STANDART_D);
 		}
 
 		public void SetNormalShift(double normalLength) {
