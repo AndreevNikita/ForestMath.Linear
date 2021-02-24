@@ -9,13 +9,13 @@ namespace ForestMath.Linear {
 	public struct Vector3 { 
 		public double X, Y, Z;
 
-		public Vector2 XY { get => new Vector2(X, Y); }
-		public Vector2 YZ { get => new Vector2(Y, Z); }
-		public Vector2 ZX { get => new Vector2(Z, X); }
+		public Vector2 XY { get => new Vector2(X, Y); set { X = value.X; Y = value.Y; } }
+		public Vector2 YZ { get => new Vector2(Y, Z); set { Y = value.X; Z = value.Y; } }
+		public Vector2 ZX { get => new Vector2(Z, X); set { Z = value.X; X = value.Y; } }
 
-		public Vector2 YX { get => new Vector2(Y, X); }
-		public Vector2 ZY { get => new Vector2(Z, Y); }
-		public Vector2 XZ { get => new Vector2(X, Z); }
+		public Vector2 YX { get => new Vector2(Y, X); set { Y = value.X; X = value.Y; } }
+		public Vector2 ZY { get => new Vector2(Z, Y); set { Z = value.X; Y = value.Y; } }
+		public Vector2 XZ { get => new Vector2(X, Z); set { X = value.X; Z = value.Y; } }
 
 		public double Yaw {
 			get { return X; }

@@ -8,14 +8,51 @@ namespace ForestMath.Linear {
 	public struct Vector4 { 
 		public double X, Y, Z, W;
 
-		public Vector3 XYZ { get => new Vector3(X, Y, Z); }
-		public Vector3 YZW { get => new Vector3(Y, Z, W); }
-		public Vector3 ZWX { get => new Vector3(Z, W, X); }
-		public Vector3 WXY { get => new Vector3(W, X, Y); }
+		//Oh my...
+		public Vector3 XYZ { get => new Vector3(X, Y, Z); set { X = value.X; Y = value.Y; Z = value.Z; } }
+		public Vector3 XZY { get => new Vector3(X, Z, Y); set { X = value.X; Z = value.Y; Y = value.Z; } }
+		public Vector3 XYW { get => new Vector3(X, Y, W); set { X = value.X; Y = value.Y; W = value.Z; } }
+		public Vector3 XWY { get => new Vector3(X, W, Y); set { X = value.X; W = value.Y; Y = value.Z; } }
+		public Vector3 XZW { get => new Vector3(X, Z, W); set { X = value.X; Z = value.Y; W = value.Z; } }
+		public Vector3 XWZ { get => new Vector3(X, W, Z); set { X = value.X; W = value.Y; Z = value.Z; } }
 
-		public Vector2 XY { get => new Vector2(X, Y); }
-		public Vector2 YZ { get => new Vector2(Y, Z); }
-		public Vector2 ZX { get => new Vector2(Z, X); }
+
+
+		public Vector3 YXZ { get => new Vector3(Y, X, Z); set { Y = value.X; X = value.Y; Z = value.Z; } }
+		public Vector3 YZX { get => new Vector3(Y, Z, X); set { Y = value.X; Z = value.Y; X = value.Z; } }
+		public Vector3 YXW { get => new Vector3(Y, X, W); set { Y = value.X; X = value.Y; W = value.Z; } }
+		public Vector3 YWX { get => new Vector3(Y, W, X); set { Y = value.X; W = value.Y; X = value.Z; } }
+		public Vector3 YZW { get => new Vector3(Y, Z, W); set { Y = value.X; Z = value.Y; W = value.Z; } }
+		public Vector3 YWZ { get => new Vector3(Y, W, Z); set { Y = value.X; W = value.Y; Z = value.Z; } }
+		
+
+
+		public Vector3 ZXY { get => new Vector3(Z, X, Y); set { Z = value.X; X = value.Y; Y = value.Z; } }
+		public Vector3 ZYX { get => new Vector3(Z, Y, X); set { Z = value.X; Y = value.Y; X = value.Z; } }
+		public Vector3 ZXW { get => new Vector3(Z, X, W); set { Z = value.X; X = value.Y; W = value.Z; } }
+		public Vector3 ZWX { get => new Vector3(Z, W, X); set { Z = value.X; W = value.Y; X = value.Z; } }
+		public Vector3 ZYW { get => new Vector3(Z, Y, W); set { Z = value.X; Y = value.Y; W = value.Z; } }
+		public Vector3 ZWY { get => new Vector3(Z, W, Y); set { Z = value.X; W = value.Y; Y = value.Z; } }
+
+
+
+		public Vector3 WXY { get => new Vector3(W, X, Y); set { W = value.X; X = value.Y; Y = value.Z; } }
+		public Vector3 WYX { get => new Vector3(W, Y, X); set { W = value.X; Y = value.Y; X = value.Z; } }
+		public Vector3 WXZ { get => new Vector3(W, X, Z); set { W = value.X; X = value.Y; Z = value.Z; } }
+		public Vector3 WZX { get => new Vector3(W, Z, X); set { W = value.X; Z = value.Y; X = value.Z; } }
+		public Vector3 WYZ { get => new Vector3(W, Y, Z); set { W = value.X; Y = value.Y; Z = value.Z; } }
+		public Vector3 WZY { get => new Vector3(W, Z, Y); set { W = value.X; Z = value.Y; Y = value.Z; } }
+
+
+
+
+		public Vector2 XY { get => new Vector2(X, Y); set { X = value.X; Y = value.Y; } }
+		public Vector2 YZ { get => new Vector2(Y, Z); set { Y = value.X; Z = value.Y; } }
+		public Vector2 ZX { get => new Vector2(Z, X); set { Z = value.X; X = value.Y; } }
+
+		public Vector2 YX { get => new Vector2(Y, X); set { Y = value.X; X = value.Y; } }
+		public Vector2 ZY { get => new Vector2(Z, Y); set { Z = value.X; Y = value.Y; } }
+		public Vector2 XZ { get => new Vector2(X, Z); set { X = value.X; Z = value.Y; } }
 
 		public double Length {
 			get { return length(); }
