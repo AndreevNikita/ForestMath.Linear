@@ -11,22 +11,11 @@ namespace ForestMath.Linear {
 
 		public static readonly Quaternion Zero = FromYawPitchRoll(0, 0, 0);
 
-		public Quaternion(double w, double x, double y, double z, bool fromEulers = true, bool normalize = true, AngleMeasure measure = AngleMeasure.RADIANS) {
-			if(fromEulers) {
-				if(measure == AngleMeasure.DEGREES)
-					w = Geometry.ToRadians(w);
-				this.W = Math.Cos(w / 2.0);
-				double sinwd2 = Math.Sin(w / 2.0);
-				this.X = x * sinwd2;
-				this.Y = y * sinwd2;
-				this.Z = z * sinwd2;
-			} else {
-				this.W = w;
-				this.X = x;
-				this.Y = y;
-				this.Z = z;
-			}
-
+		public Quaternion(double w, double x, double y, double z, bool normalize = true) {
+			this.W = w;
+			this.X = x;
+			this.Y = y;
+			this.Z = z;
 			
 			if(normalize)
 				this.Normalize();
@@ -39,25 +28,33 @@ namespace ForestMath.Linear {
 			Z = vec.Z;
 		}
 
+		public static Quaternion FromEulers(double angle, Vector3 Axis, AngleMeasure measure = AngleMeasure.RADIANS) { 
+			if(measure == AngleMeasure.DEGREES)
+				angle = Geometry.ToRadians(angle);
+			double sind2 = Math.Sin(angle / 2.0);
+			return new Quaternion( Math.Cos(angle / 2.0), Axis.X * sind2, Axis.Y * sind2, Axis.Z * sind2);
+			
+		}
+
 		public static Quaternion operator+(Quaternion a, Quaternion b) {
-			return new Quaternion(a.W + b.W, a.X + b.X, a.Y + b.Y, a.Z + b.Z, false, false);
+			return new Quaternion(a.W + b.W, a.X + b.X, a.Y + b.Y, a.Z + b.Z, false);
 		}
 
 		public static Quaternion operator-(Quaternion a, Quaternion b) {
-			return new Quaternion(a.W - b.W, a.X - b.X, a.Y - b.Y, a.Z - b.Z, false, false);
+			return new Quaternion(a.W - b.W, a.X - b.X, a.Y - b.Y, a.Z - b.Z, false);
 		}
 
 		public static Quaternion operator-(Quaternion a) {
-			return new Quaternion(a.W, -a.X, -a.Y, -a.Z, false, false);
+			return new Quaternion(a.W, -a.X, -a.Y, -a.Z, false);
 		}
 
 		
 		public static Quaternion operator*(Quaternion a, double mul) {
-			return new Quaternion(a.W * mul, a.X * mul , a.Y * mul, a.Z * mul, false, false);
+			return new Quaternion(a.W * mul, a.X * mul , a.Y * mul, a.Z * mul, false);
 		}
 
 		public static Quaternion operator/(Quaternion a, double div) {
-			return new Quaternion(a.W / div, a.X / div , a.Y / div, a.Z / div, false, false);
+			return new Quaternion(a.W / div, a.X / div , a.Y / div, a.Z / div, false);
 		}
 
 		//a * b дают кватернион, равносильный повороту сначала b потом a
@@ -66,7 +63,7 @@ namespace ForestMath.Linear {
 				a.W * b.W - a.X * b.X - a.Y * b.Y - a.Z * b.Z, 
 				a.X * b.W + a.W * b.X + a.Y * b.Z - a.Z * b.Y,
 				a.Y * b.W + a.W * b.Y + a.Z * b.X - a.X * b.Z, 
-				a.Z * b.W + a.W * b.Z + a.X * b.Y - a.Y * b.X, false, true);
+				a.Z * b.W + a.W * b.Z + a.X * b.Y - a.Y * b.X, true);
 		}
 
 		public static double operator^(Quaternion a, Quaternion b) { 
@@ -103,7 +100,7 @@ namespace ForestMath.Linear {
 		}
 
 		public Quaternion Normalized() {
-			return new Quaternion(W, X, Y, Z, false, true);
+			return new Quaternion(W, X, Y, Z, true);
 		}
 
 		public Vector3 GetYawPitchRoll(AngleMeasure measure = AngleMeasure.RADIANS) {
