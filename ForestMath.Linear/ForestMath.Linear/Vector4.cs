@@ -47,12 +47,25 @@ namespace ForestMath.Linear {
 
 
 		public Vector2 XY { get => new Vector2(X, Y); set { X = value.X; Y = value.Y; } }
-		public Vector2 YZ { get => new Vector2(Y, Z); set { Y = value.X; Z = value.Y; } }
-		public Vector2 ZX { get => new Vector2(Z, X); set { Z = value.X; X = value.Y; } }
-
-		public Vector2 YX { get => new Vector2(Y, X); set { Y = value.X; X = value.Y; } }
-		public Vector2 ZY { get => new Vector2(Z, Y); set { Z = value.X; Y = value.Y; } }
 		public Vector2 XZ { get => new Vector2(X, Z); set { X = value.X; Z = value.Y; } }
+		public Vector2 XW { get => new Vector2(X, W); set { X = value.X; W = value.Y; } }
+
+
+		public Vector2 YX { get => new Vector2(Y, Y); set { Y = value.X; X = value.Y; } }
+		public Vector2 YZ { get => new Vector2(Y, Z); set { Y = value.X; Z = value.Y; } }
+		public Vector2 YW { get => new Vector2(Y, W); set { Y = value.X; W = value.Y; } }
+
+
+		public Vector2 ZX { get => new Vector2(Z, X); set { Z = value.X; X = value.Y; } }
+		public Vector2 ZY { get => new Vector2(Z, Y); set { Z = value.X; Y = value.Y; } }
+		public Vector2 ZW { get => new Vector2(Z, W); set { Z = value.X; W = value.Y; } }
+
+
+		public Vector2 WX { get => new Vector2(W, X); set { W = value.X; X = value.Y; } }
+		public Vector2 WY { get => new Vector2(W, Y); set { W = value.X; Y = value.Y; } }
+		public Vector2 WZ { get => new Vector2(W, Z); set { W = value.X; Z = value.Y; } }
+
+
 
 		public double Length {
 			get { return length(); }
