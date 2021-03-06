@@ -123,7 +123,7 @@ namespace ForestMath.Linear {
 		}
 
 		public static Ray3 RotateFull(this Ray3 ray, Quaternion quaternion) {
-			return Ray3.FromTwoPoints(ray.StartPoint.Rotate(quaternion), ray.Dir.Rotate(quaternion), ray.IsLine);
+			return new Ray3(ray.StartPoint.Rotate(quaternion), ray.Dir.Rotate(quaternion), ray.IsLine);
 		}
 
 		public static Ray3 RotateDir(this Ray3 ray, Quaternion quaternion) {
