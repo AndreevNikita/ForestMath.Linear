@@ -18,6 +18,14 @@ namespace ForestMath.Linear {
 			return rads / Math.PI * 180.0;
 		}
 
+		public static Vector3 ToRadians(Vector3 ypr) {
+			return ypr / 180.0 * Math.PI;
+		}
+
+		public static Vector3 ToDegrees(Vector3 ypr) {
+			return ypr / Math.PI * 180.0;
+		}
+
 		public static Vector3 CrossProduct(Vector3 vec1, Vector3 vec2) { 
 			return new Vector3(vec1.Y * vec2.Z - vec2.Y * vec1.Z, vec1.Z * vec2.X - vec1.X * vec2.Z, vec1.X * vec2.Y - vec2.X * vec1.Y);
 		}
