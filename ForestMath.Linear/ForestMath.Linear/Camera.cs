@@ -47,9 +47,9 @@ namespace ForestMath.Linear {
 			//result *= Polygon.Matrix4.rotationX(ypr.Pitch, Geometry.AngleMeasure.RADIANS);
 
 
-			result *= Matrix4.RotationZ(-YPR.Roll, Geometry.AngleMeasure.RADIANS);
-			result *= Matrix4.RotationX(YPR.Pitch, Geometry.AngleMeasure.RADIANS);
-			result *= Matrix4.RotationY(-(YPR.Yaw + Math.PI / 2.0), Geometry.AngleMeasure.RADIANS);
+			result *= Matrix4.RotationZ(-YPR.Roll, AngleMeasure.RADIANS);
+			result *= Matrix4.RotationX(YPR.Pitch, AngleMeasure.RADIANS);
+			result *= Matrix4.RotationY(-(YPR.Yaw + Math.PI / 2.0), AngleMeasure.RADIANS);
 			result *= Matrix4.Translation(-Pos.X, -Pos.Y, -Pos.Z);
 			
 

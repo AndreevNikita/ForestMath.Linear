@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ForestMath.Linear {
-	public static partial class Geometry {
 
-		public enum AngleMeasure { RADIANS, DEGREES };
+	public enum AngleMeasure { RADIANS, DEGREES };
+
+	public static partial class Geometry {
 
 		public static double ToRadians(double angle) {
 			return angle / 180.0 * Math.PI;
