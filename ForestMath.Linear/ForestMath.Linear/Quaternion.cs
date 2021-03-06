@@ -70,7 +70,7 @@ namespace ForestMath.Linear {
 				a.W * b.W - a.X * b.X - a.Y * b.Y - a.Z * b.Z, 
 				a.X * b.W + a.W * b.X + a.Y * b.Z - a.Z * b.Y,
 				a.Y * b.W + a.W * b.Y + a.Z * b.X - a.X * b.Z, 
-				a.Z * b.W + a.W * b.Z + a.X * b.Y - a.Y * b.X, true);
+				a.Z * b.W + a.W * b.Z + a.X * b.Y - a.Y * b.X, false);
 		}
 
 		public static double operator^(Quaternion a, Quaternion b) { 
