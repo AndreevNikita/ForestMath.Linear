@@ -35,12 +35,39 @@ namespace ForestMath.Linear {
 			Z = vec.Z;
 		}
 
-		public static Quaternion FromEulers(double angle, Vector3 Axis, AngleMeasure measure = AngleMeasure.RADIANS) { 
+		public static Quaternion FromAxisRotation(double angle, Vector3 Axis, AngleMeasure measure = AngleMeasure.RADIANS) => FromAxisRotation(angle, Axis.X, Axis.Y, Axis.Z, measure);
+
+		public static Quaternion FromAxisRotation(double angle, double axisX, double axisY, double axisZ, AngleMeasure measure = AngleMeasure.RADIANS) { 
 			if(measure == AngleMeasure.DEGREES)
 				angle = Geometry.ToRadians(angle);
 			double sind2 = Math.Sin(angle / 2.0);
-			return new Quaternion( Math.Cos(angle / 2.0), Axis.X * sind2, Axis.Y * sind2, Axis.Z * sind2);
-			
+			return new Quaternion( Math.Cos(angle / 2.0), axisX * sind2, axisY * sind2, axisZ * sind2);
+		}
+
+		public static Quaternion FromYaw(double yaw, AngleMeasure angleMeasure = AngleMeasure.RADIANS) {
+			return Quaternion.FromAxisRotation(yaw, 0.0, 1.0, 0.0, angleMeasure);
+		}
+
+		public static Quaternion FromYawPitch(double yaw, double pitch, AngleMeasure angleMeasure = AngleMeasure.RADIANS) {
+			return Quaternion.FromAxisRotation(yaw, 0.0, 1.0, 0.0, angleMeasure) * Quaternion.FromAxisRotation(pitch, 0.0, 0.0, 1.0, angleMeasure);
+		}
+
+		public static Quaternion FromYawPitchRoll(Vector3 ypr, AngleMeasure angleMeasure = AngleMeasure.RADIANS) => FromYawPitchRoll(ypr.Yaw, ypr.Pitch, ypr.Roll);
+
+		public static Quaternion FromYawPitchRoll(double yaw, double pitch, double roll, AngleMeasure angleMeasure = AngleMeasure.RADIANS) {
+			return Quaternion.FromAxisRotation(yaw, 0.0, 1.0, 0.0, angleMeasure) * Quaternion.FromAxisRotation(pitch, 0.0, 0.0, 1.0, angleMeasure) * Quaternion.FromAxisRotation(roll, 1.0, 0.0, 0.0, angleMeasure);
+		}
+
+		public Vector3 GetYawPitchRoll(AngleMeasure measure = AngleMeasure.RADIANS) {
+			return measure == AngleMeasure.RADIANS ? new Vector3(
+				Math.Atan2(2*Y*W - 2*X*Z, 1 - 2*Y*Y - 2*Z*Z),
+				Math.Asin(Math.Max(Math.Min(2*X*Y + 2*Z*W, 1.0), -1.0)),
+				Math.Atan2(2*X*W - 2*Y*Z, 1 - 2*X*X - 2*Z*Z)
+			) : new Vector3(
+				Geometry.ToDegrees(Math.Atan2(2*Y*W - 2*X*Z, 1 - 2*Y*Y - 2*Z*Z)),
+				Geometry.ToDegrees(Math.Asin(Math.Max(Math.Min(2*X*Y + 2*Z*W, 1.0), -1.0))),
+				Geometry.ToDegrees(Math.Atan2(2*X*W - 2*Y*Z, 1 - 2*X*X - 2*Z*Z))
+			);
 		}
 
 		public static Quaternion operator+(Quaternion a, Quaternion b) {
@@ -110,25 +137,10 @@ namespace ForestMath.Linear {
 			return new Quaternion(W, X, Y, Z, true);
 		}
 
-		public Vector3 GetYawPitchRoll(AngleMeasure measure = AngleMeasure.RADIANS) {
-			return measure == AngleMeasure.RADIANS ? new Vector3(
-				Math.Atan2(2*Y*W - 2*X*Z, 1 - 2*Y*Y - 2*Z*Z),
-				Math.Asin(Math.Max(Math.Min(2*X*Y + 2*Z*W, 1.0), -1.0)),
-				Math.Atan2(2*X*W - 2*Y*Z, 1 - 2*X*X - 2*Z*Z)
-			) : new Vector3(
-				Geometry.ToDegrees(Math.Atan2(2*Y*W - 2*X*Z, 1 - 2*Y*Y - 2*Z*Z)),
-				Geometry.ToDegrees(Math.Asin(Math.Max(Math.Min(2*X*Y + 2*Z*W, 1.0), -1.0))),
-				Geometry.ToDegrees(Math.Atan2(2*X*W - 2*Y*Z, 1 - 2*X*X - 2*Z*Z))
-			);
-		}
-
 		public Vector3 Rotate(Vector3 vec) {
 			return this * new Quaternion(vec) * (-this);
 		}
 
-		public static Quaternion FromYawPitchRoll(double yaw, double pitch = 0.0, double roll = 0.0) {
-			return new Quaternion(yaw, 0.0, 1.0, 0.0) * new Quaternion(pitch, 0.0, 0.0, 1.0) * new Quaternion(roll, 1.0, 0.0, 0.0);
-		}
 
 		public static implicit operator Quaternion(Vector3 vec) {
 			return new Quaternion(vec);
