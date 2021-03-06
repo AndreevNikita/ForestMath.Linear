@@ -28,6 +28,13 @@ namespace ForestMath.Linear {
 			Z = vec.Z;
 		}
 
+		public Quaternion(Vector4 vec) {
+			W = vec.W;
+			X = vec.X;
+			Y = vec.Y;
+			Z = vec.Z;
+		}
+
 		public static Quaternion FromEulers(double angle, Vector3 Axis, AngleMeasure measure = AngleMeasure.RADIANS) { 
 			if(measure == AngleMeasure.DEGREES)
 				angle = Geometry.ToRadians(angle);
@@ -124,11 +131,19 @@ namespace ForestMath.Linear {
 		}
 
 		public static implicit operator Quaternion(Vector3 vec) {
-			return new Quaternion(0.0, vec.X, vec.Y, vec.Z, false);
+			return new Quaternion(vec);
+		}
+
+		public static implicit operator Quaternion(Vector4 vec) {
+			return new Quaternion(vec);
+		}
+
+		public static implicit operator Vector4(Quaternion vec) {
+			return new Vector4(vec);
 		}
 
 		public override string ToString() {
-			 return GetYawPitchRoll(AngleMeasure.DEGREES).ToString();
+			 return $"(W = {W}; X = {X}; Y = {Y}; Z = {Z})";
 		}
 
 
