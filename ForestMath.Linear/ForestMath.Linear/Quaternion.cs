@@ -41,21 +41,21 @@ namespace ForestMath.Linear {
 			if(measure == AngleMeasure.DEGREES)
 				angle = Geometry.ToRadians(angle);
 			double sind2 = Math.Sin(angle / 2.0);
-			return new Quaternion( Math.Cos(angle / 2.0), axisX * sind2, axisY * sind2, axisZ * sind2);
+			return new Quaternion(Math.Cos(angle / 2.0), axisX * sind2, axisY * sind2, axisZ * sind2);
 		}
 
 		public static Quaternion FromYaw(double yaw, AngleMeasure angleMeasure = AngleMeasure.RADIANS) {
-			return Quaternion.FromAxisRotation(yaw, 0.0, 1.0, 0.0, angleMeasure);
+			return Quaternion.FromAxisRotation(yaw, 0.0, 1.0, 0.0, angleMeasure).Normalized();
 		}
 
 		public static Quaternion FromYawPitch(double yaw, double pitch, AngleMeasure angleMeasure = AngleMeasure.RADIANS) {
-			return Quaternion.FromAxisRotation(yaw, 0.0, 1.0, 0.0, angleMeasure) * Quaternion.FromAxisRotation(pitch, 0.0, 0.0, 1.0, angleMeasure);
+			return (Quaternion.FromAxisRotation(yaw, 0.0, 1.0, 0.0, angleMeasure) * Quaternion.FromAxisRotation(pitch, 0.0, 0.0, 1.0, angleMeasure)).Normalized();
 		}
 
 		public static Quaternion FromYawPitchRoll(Vector3 ypr, AngleMeasure angleMeasure = AngleMeasure.RADIANS) => FromYawPitchRoll(ypr.Yaw, ypr.Pitch, ypr.Roll);
 
 		public static Quaternion FromYawPitchRoll(double yaw, double pitch, double roll, AngleMeasure angleMeasure = AngleMeasure.RADIANS) {
-			return Quaternion.FromAxisRotation(yaw, 0.0, 1.0, 0.0, angleMeasure) * Quaternion.FromAxisRotation(pitch, 0.0, 0.0, 1.0, angleMeasure) * Quaternion.FromAxisRotation(roll, 1.0, 0.0, 0.0, angleMeasure);
+			return (Quaternion.FromAxisRotation(yaw, 0.0, 1.0, 0.0, angleMeasure) * Quaternion.FromAxisRotation(pitch, 0.0, 0.0, 1.0, angleMeasure) * Quaternion.FromAxisRotation(roll, 1.0, 0.0, 0.0, angleMeasure)).Normalized();
 		}
 
 		public Vector3 GetYawPitchRoll(AngleMeasure measure = AngleMeasure.RADIANS) {
