@@ -9,7 +9,7 @@ namespace ForestMath.Linear {
 	public struct Quaternion {
 		public double W, X, Y, Z;
 
-		public static readonly Quaternion Zero = FromYawPitchRoll(0, 0, 0);
+		public static readonly Quaternion Identity = FromYawPitchRoll(0, 0, 0);
 
 		public Quaternion(double w, double x, double y, double z, bool normalize = true) {
 			this.W = w;
