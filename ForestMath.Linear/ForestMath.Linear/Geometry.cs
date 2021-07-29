@@ -112,7 +112,7 @@ namespace ForestMath.Linear {
 			return a * (1.0 - percent) + b * percent;
 		}
 
-		public static Vector3 Interpolate(Quaternion a, Quaternion b, double percent) {
+		public static Quaternion Interpolate(Quaternion a, Quaternion b, double percent) {
 			return a * (1.0 - percent) + b * percent;
 		}
 
